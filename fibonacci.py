@@ -12,11 +12,19 @@ def fibonacci_iterative(n):
     return result
 
 
-def fibonacci_recursive(n):
+def fibonacci_recursive(n):    
     if n <= 2:
         return 1
     return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
     
 
-print(fibonacci_iterative(10))
-print(fibonacci_recursive(10))
+fib = {1: 1, 2: 1}
+def fibonacci_recursive_cached(n):
+    if n in fib:
+        return fib[n]
+    fib[n] = fibonacci_recursive_cached(n - 1) + fibonacci_recursive_cached(n - 2)
+    return fib[n]
+
+# print(fibonacci_iterative(5))
+# print(fibonacci_recursive(5))
+print(fibonacci_recursive_cached(5))
