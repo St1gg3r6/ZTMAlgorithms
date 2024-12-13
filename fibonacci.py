@@ -18,13 +18,18 @@ def fibonacci_recursive(n):
     return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
     
 
-fib = {1: 1, 2: 1}
-def fibonacci_recursive_cached(n):
-    if n in fib:
+
+def fibonacci_recursive_cached():
+    fib = {1: 1, 2: 1}
+    def fib_inner(n):
+        if n in fib:
+            return fib[n]
+        fib[n] = fib_inner(n - 1) + fib_inner(n - 2)
         return fib[n]
-    fib[n] = fibonacci_recursive_cached(n - 1) + fibonacci_recursive_cached(n - 2)
-    return fib[n]
+    return fib_inner
 
 # print(fibonacci_iterative(5))
 # print(fibonacci_recursive(5))
-print(fibonacci_recursive_cached(5))
+# print(fibonacci_recursive_cached(5))
+fib_seq = fibonacci_recursive_cached()
+print(fib_seq(100))
